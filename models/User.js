@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const validateEmail = (email) => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -6,7 +6,7 @@ const validateEmail = (email) => {
 };
 
 // Constructs a new instance of the schema class
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true, trim: true },
     email: {
@@ -41,7 +41,7 @@ userSchema
   });
 
 // Using mongoose.model() to compile a model based on 'userSchema'
-const User = mongoose.model("user", userSchema);
+const User = model("user", userSchema);
 
 const handleError = (err) => console.error(err);
 
@@ -54,3 +54,5 @@ User.create(
   },
   (err) => (err ? handleError(err) : console.log("Created new document"))
 );
+
+module.exports = User;

@@ -1,7 +1,7 @@
-const { default: mongoose } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 //Subdocument embedded in a parent document
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
   reactionId: { type: Schema.Types.ObjectId }, // * Default value is set to a new ObjectId
   reactionBody: { type: String, required: true, maxLength: 280 },
   username: { type: String, required: true },
@@ -13,7 +13,7 @@ const reactionSchema = new mongoose.Schema({
 });
 
 // Constructs a new instance of the schema class
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -50,6 +50,6 @@ thoughtSchema
   });
 
 // Using mongoose.model() to compile a model based on 'userSchema'
-const Thought = mongoose.model("thought", thoughtSchema);
+const Thought = model("thought", thoughtSchema);
 
 module.exports = Thought;
