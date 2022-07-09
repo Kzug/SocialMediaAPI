@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const thoughtSchema = require("./Thought");
+// const { thoughtSchema } = require("./Thought.js").schema;
 
 const validateEmail = (email) => {
   const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -22,8 +24,8 @@ const userSchema = new Schema(
     meta: {
       friendCount: Number,
     },
-    thoughts: { type: Schema.Types.ObjectId, ref: "thought" },
-    friends: { type: Schema.Types.ObjectId, ref: "user" },
+    thoughts: [{ type: Schema.Types.ObjectId, ref: "thought" }],
+    friends: [{ type: Schema.Types.ObjectId, ref: "user" }],
   },
   {
     toJSON: {
@@ -43,16 +45,16 @@ userSchema
 // Using mongoose.model() to compile a model based on 'userSchema'
 const User = model("user", userSchema);
 
-const handleError = (err) => console.error(err);
+// const handleError = (err) => console.error(err);
 
-User.create(
-  {
-    username: "cooldude101",
-    email: "jerry@jerry.com",
-    thoughts: ["super bored today", "time to go out to eat!"],
-    friends: ["George", "Fred", "Sam"],
-  },
-  (err) => (err ? handleError(err) : console.log("Created new document"))
-);
+// User.create(
+//   {
+//     username: "cooldude101",
+//     email: "jerry@jerry.com",
+//     thoughts: ["super bored today", "time to go out to eat!"],
+//     friends: ["George", "Fred", "Sam"],
+//   },
+//   (err) => (err ? handleError(err) : console.log("Created new document"))
+// );
 
 module.exports = User;
