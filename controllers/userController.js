@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const { ObjectId } = require("mongoose").Types;
 
 // Aggregate function for getting the overall grade using $avg
 const userthought = async (userId) =>
@@ -7,6 +8,12 @@ const userthought = async (userId) =>
     { $match: { _id: ObjectId(userId) } },
     {
       $unwind: "$thoughts",
+    },
+    {
+      $group: {
+        _id: ObjectId(userId),
+        thoughts: { $push: "$thoughts" },
+      },
     },
   ]);
 
@@ -20,11 +27,11 @@ module.exports = {
   //Get a single user with thoughts attached
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userid })
-      //.populate({ path: "thoughts", select: "-__v" })
-      .then((user) =>
+      .populate({ path: "thoughts", select: "-__v" })
+      .then(async (user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID exists" })
-          : res.json({ user, userthought: userthought(req.params.userid) })
+          : res.json({ user, userthought: userthought(req.params.userId) })
       )
       .catch((err) => res.status(500).json(err));
   },

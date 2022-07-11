@@ -13,6 +13,6 @@ router.route("/create").get(getUsers).post(createUser);
 router.route("/").get(getUsers);
 
 //- `GET` a single user by its `_id` and populated thought and friend data
-router.route("/:userId").get(getSingleUser);
+router.route("/:userid").get(getSingleUser);
 
 module.exports = router;
