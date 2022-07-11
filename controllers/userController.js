@@ -19,12 +19,12 @@ module.exports = {
   },
   //Get a single user with thoughts attached
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
+    User.findOne({ _id: req.params.userid })
       //.populate({ path: "thoughts", select: "-__v" })
       .then((user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID exists" })
-          : res.json({ user, userthought: userthought(req.params.userId) })
+          : res.json({ user, userthought: userthought(req.params.userid) })
       )
       .catch((err) => res.status(500).json(err));
   },
