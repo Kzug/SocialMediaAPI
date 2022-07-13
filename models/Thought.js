@@ -28,9 +28,6 @@ const thoughtSchema = new Schema(
       default: Date.now,
       //* Use a getter method to format the timestamp on query
     },
-    meta: {
-      reactionCount: Number,
-    },
   },
   {
     toJSON: {
@@ -46,10 +43,14 @@ thoughtSchema
   .virtual("reactionCount")
   // Getter
   .get(function () {
-    return this.meta.reactionCount;
+    return this.reactions.length;
   });
 
 // Using mongoose.model() to compile a model based on 'userSchema'
 const Thought = model("thought", thoughtSchema);
 
 module.exports = Thought;
+
+// meta: {
+//   reactionCount: Number,
+// },
