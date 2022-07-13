@@ -30,6 +30,7 @@ module.exports = {
   },
   //get a thought by ID
   getSingleThought(req, res) {
+    //note to self: the thoughtId needs to be the same spelled and capitalization as the thoughtID in the getSingleThought function
     Thought.findOne({ _id: req.params.thoughtId })
       .select("-__v")
       .then((thought) =>

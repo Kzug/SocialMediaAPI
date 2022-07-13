@@ -13,6 +13,6 @@ router.route("/create").post(addThought);
 router.route("/").get(getAllThoughts);
 
 //- `GET` a single thought
-router.route("/thought/:thoughtid").get(getSingleThought);
+router.route("/thought/:thoughtId").get(getSingleThought);
 
 module.exports = router;
