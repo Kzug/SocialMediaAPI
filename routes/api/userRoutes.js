@@ -19,7 +19,7 @@ router.route("/").get(getUsers);
 router.route("/:userid").get(getSingleUser);
 
 //update a user
-router.route("/update/:userid").get(getSingleUser).post(updateUser);
+router.route("/update/:userid").get(getSingleUser).put(updateUser);
 
 //delete a user
 router.route("/delete/:userid").get(getSingleUser).delete(deleteUser);
