@@ -38,8 +38,9 @@ userSchema
   .virtual("friendCount")
   // Getter
   .get(function () {
-    return this.meta.friendCount;
+    return this.friends.length;
   });
+  
 
 // Using mongoose.model() to compile a model based on 'userSchema'
 const User = model("user", userSchema);

@@ -1,6 +1,7 @@
 const { User, Thought } = require("../models");
 
 module.exports = {
+  //adding a thought to a user
   addThought(req, res) {
     Thought.create(req.body)
       .then((thoughtdata) => {
@@ -66,4 +67,37 @@ module.exports = {
 
       .catch((err) => res.status(500).json(err));
   },
-};
+  //adding a reaction to a thought
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $push: { reactions: req.body } },
+      { new: true }
+    )
+      .then((reaction) =>
+        !reaction
+          ? res.status(404).json({
+              message: "no thought with that id",
+            })
+          : res.json(reaction)
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+},
+//removing a reaction to a thought
+deleteReaction(req, res) {
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $pull: { reactions: { reactionId: req.params.reactionId } } },
+    { new: true }
+  )
+    .then((reaction) =>
+      !reaction
+        ? res.status(404).json({ message: "No such reaction exists" })
+        : res.json({ message: "Reaction successfully deleted!" })
+    )
+
+    .catch((err) => res.status(500).json(err));
+}};
