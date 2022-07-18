@@ -20,3 +20,7 @@
  You can run this application by running a server and testing the routes through insomnia or a similar program
 ## Questions
 Please contact me at https://github.com/kzug or e-mail me at kierstenzug@gmail.com
+
+Link to youtube walkthrough:
+Part I: https://www.youtube.com/watch?v=5cMugyG1u8A
+Part II: https://www.youtube.com/watch?v=e3ZCFjj2JdE&feature=youtu.be
